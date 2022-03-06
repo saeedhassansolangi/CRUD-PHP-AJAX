@@ -1,0 +1,24 @@
+body {
+    background-color: aliceblue;
+    font-family: "Cascadia Code", sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input, select {
+    border: 1px solid #121212 !important;
+    outline:none !important;
+    font-weight: bold;
+}
+
+option {
+    background-color: aquamarine !important
+}
+
+button {
+    background-color: cornflowerblue !important;
+    color: white !important;
+}
