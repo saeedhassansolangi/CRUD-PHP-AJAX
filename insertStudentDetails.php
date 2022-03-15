@@ -1,6 +1,7 @@
 <?php
 
     require "./config.php";
+
     $stdId = $_POST['stdId'];
     $email = $_POST['email'];
     $dept =  $_POST['dept'];

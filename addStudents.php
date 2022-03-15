@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title> Add Student</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Add-Student</title>
 </head>
 
 <body>
 <div class="container">
     <h1>Add Student Details</h1>
+
+    <div class="view-students mb-3">
+        <a href="viewStudents.php" class="btn btn-success">View Students</a>
+    </div>
 
     <form action="" id="formAddStudent" name="formAddStudent">
            <?php
@@ -47,7 +51,6 @@
             <label for="">Roll No</label>
             <input type="text" class="form-control" name="roll_no" id="roll_no" >
         </div>
-
         <button type="submit" class="btn mt-4">Submit</button>
     </form>
 
@@ -58,20 +61,25 @@
 
     formAddStudent.addEventListener("submit", function (e) {
         e.preventDefault()
-        const stdId = document.forms['formAddStudent']['stdId'].value
-        const email = document.forms['formAddStudent']['email'].value
-        const dept = document.forms['formAddStudent']['dept'].value
-        const addr = document.forms['formAddStudent']['addr'].value
-        const roll_no = document.forms['formAddStudent']['roll_no'].value
+        let stdId = document.forms['formAddStudent']['stdId'].value
+        let email = document.forms['formAddStudent']['email'].value
+        let dept = document.forms['formAddStudent']['dept'].value
+        let addr = document.forms['formAddStudent']['addr'].value
+        let roll_no = document.forms['formAddStudent']['roll_no'].value
 
-        console.log({
-            stdId, email, dept, addr, roll_no
-        })
+        if(!stdId || !email || !dept || !addr || !roll_no) {
+            alert("Please fill all the fields");
+            return;
+        }
 
         let xhr = new XMLHttpRequest();
         xhr.open('POST', `insertStudentDetails.php`, true);
         xhr.onreadystatechange= function () {
-            console.log(xhr.responseText)
+            if(xhr.responseText.includes('successfully')){
+                document.getElementById("dataContainer").innerHTML = xhr.responseText;
+                document.getElementById("formAddStudent").reset();
+                return;
+            }
             document.getElementById("dataContainer").innerHTML = xhr.responseText;
         }
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

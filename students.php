@@ -56,12 +56,9 @@
     let fetchbtn = document.getElementById("fetchbtn");
     fetchbtn.addEventListener("click", fetchData);
     function fetchData(){
-
         let studentId = document.getElementById("stdId").value
-        console.log(studentId)
         let xhr = new XMLHttpRequest(); //1
         xhr.onreadystatechange= function () { // 4
-            console.log(xhr.responseText)
             if(xhr.responseText){
                 document.getElementById("dataContainer").innerHTML = xhr.responseText;
             }else {
